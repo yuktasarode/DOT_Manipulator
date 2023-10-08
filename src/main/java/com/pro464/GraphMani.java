@@ -62,22 +62,32 @@ public class GraphMani {
 
     }
 
-    public void addNode(String g_name){
-        if (g.containsVertex(g_name) )
+    public void addNode(String label){
+        if (g.containsVertex(label) )
         {
-            System.out.println("The node " + g_name + " is already present in the graph.");
+            System.out.println("The node " + label + " is already present in the graph.");
         }
         else
         {
-            g.addVertex(g_name);
-            System.out.println("The node " + g_name + " has been added to the graph");
+            g.addVertex(label);
+            System.out.println("The node " + label + " has been added to the graph");
         }
 
     }
 
-    public void addNodes(String[] g_names){
-        for (String gn : g_names) {
+    public void addNodes(String[] label){
+        for (String gn : label) {
             addNode(gn);
+        }
+
+    }
+
+    public void addEdge(String srcLabel,String dstLabel){
+        if (g.containsEdge(srcLabel, dstLabel)) {
+            System.out.println("Cannot add edge from " + srcLabel + " to " + dstLabel + ". Already present.");
+        } else {
+            g.addEdge(srcLabel, dstLabel);
+            System.out.println("Edge has been added from " + srcLabel + " to " + dstLabel);
         }
 
     }
@@ -95,6 +105,10 @@ public class GraphMani {
         f.addNode("f");
         String[] add_Nodes = {"e","g","a","h"};
         f.addNodes(add_Nodes);
+
+        f.addEdge("e","f");
+        System.out.println(f.toString());
+        f.addEdge("a","b");
 
 
 
