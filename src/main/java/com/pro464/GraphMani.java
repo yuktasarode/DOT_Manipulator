@@ -3,7 +3,6 @@ package com.pro464;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
-import org.jgrapht.nio.dot.DOTExporter;
 import org.jgrapht.nio.dot.DOTImporter;
 
 import java.io.*;
@@ -13,7 +12,7 @@ import java.nio.file.Paths;
 import java.io.StringReader;
 
 
-public class Feature1 {
+public class GraphMani {
     private Graph<String, DefaultEdge> g;
 
     void parseGraph(String filePath) {
@@ -63,12 +62,46 @@ public class Feature1 {
 
     }
 
+    public void addNode(String g_name){
+        if (g.containsVertex(g_name) )
+        {
+            System.out.println("The node " + g_name + " is already present in the graph.");
+        }
+        else
+        {
+            g.addVertex(g_name);
+            System.out.println("The node " + g_name + " has been added to the graph");
+        }
+
+    }
+
+    public void addNodes(String[] g_names){
+        for (String gn : g_names) {
+            addNode(gn);
+        }
+
+    }
+
+
+
+
 
     public static void main(String[] args){
-        Feature1 f = new Feature1();
+        GraphMani f = new GraphMani();
         f.parseGraph("src/main/sample.DOT");
         System.out.println(f.toString());
         f.outputGraph("src/main/outputGraph.txt");
+
+        f.addNode("f");
+        String[] add_Nodes = {"e","g","a","h"};
+        f.addNodes(add_Nodes);
+
+
+
+
+
+
+
 
     }
 }
