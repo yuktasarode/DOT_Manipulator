@@ -42,6 +42,10 @@ public class GraphMani {
 
     }
 
+    public Graph<String, DefaultEdge> getGraph() {
+        return g;
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
