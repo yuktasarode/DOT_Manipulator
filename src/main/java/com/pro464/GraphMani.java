@@ -1,15 +1,24 @@
 package com.pro464;
 
+import com.mxgraph.layout.mxCircleLayout;
+import com.mxgraph.layout.mxIGraphLayout;
+import com.mxgraph.util.mxCellRenderer;
 import org.jgrapht.Graph;
+import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
+import org.jgrapht.nio.dot.DOTExporter;
 import org.jgrapht.nio.dot.DOTImporter;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.StringReader;
+import java.util.Objects;
 
 
 public class GraphMani {
@@ -92,6 +101,40 @@ public class GraphMani {
 
     }
 
+    public void outputDOTGraph(String path){
+        DOTExporter<String, DefaultEdge> exporter = new DOTExporter<>();
+        StringWriter writer = new StringWriter();
+        exporter.setVertexIdProvider(v -> v);
+        exporter.exportGraph(g, writer);
+        String graphString = writer.toString();
+        try {
+            Files.write(Paths.get(path), graphString.getBytes());
+            System.out.print("Exported graph to DOT format successfully.\n");
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+
+    }
+
+    public void outputGraphics(String path, String format){
+
+        JGraphXAdapter<String, DefaultEdge> gAdpt = new JGraphXAdapter<String, DefaultEdge>(g);
+        mxIGraphLayout layout = new mxCircleLayout(gAdpt);
+        layout.execute(gAdpt.getDefaultParent());
+
+        BufferedImage image = mxCellRenderer.createBufferedImage(gAdpt, null, 2, Color.WHITE, true, null);
+        File imgFile = new File(path);
+        try {
+            if(Objects.equals(format, "PNG")) {
+                ImageIO.write(image, "PNG", imgFile);
+                System.out.println("Successfully saved image of graph to " + path);
+            }
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+
+    }
+
 
 
 
@@ -109,6 +152,10 @@ public class GraphMani {
         f.addEdge("e","f");
         System.out.println(f.toString());
         f.addEdge("a","b");
+
+        f.outputDOTGraph("src/main/outGraph.DOT");
+
+        f.outputGraphics("src/main/newGraph.png","PNG");
 
 
 
