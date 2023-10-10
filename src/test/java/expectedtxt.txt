@@ -1,0 +1,4 @@
+Total number of nodes: 3
+Total number of edges: 2
+Node Labels: [a, b, c]
+Edges: a -> b, b -> c

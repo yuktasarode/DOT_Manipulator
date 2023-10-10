@@ -146,6 +146,7 @@ public class GraphMani {
     public static void main(String[] args){
         GraphMani f = new GraphMani();
         f.parseGraph("src/main/sample.DOT");
+
         System.out.println(f.toString());
         f.outputGraph("src/main/outputGraph.txt");
 
@@ -160,12 +161,6 @@ public class GraphMani {
         f.outputDOTGraph("src/main/outGraph.DOT");
 
         f.outputGraphics("src/main/newGraph.png","PNG");
-
-
-
-
-
-
 
 
     }
