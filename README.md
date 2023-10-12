@@ -4,10 +4,11 @@
 
 ### How to run the project:
 
-1) Download the ```Test.zip``` file from the repository.
+1) Download the ```TestGraph.zip``` file from this repository.
 2) Import the zip into a Java IDE - IntelliJ IDE.
-3) With the small green play button or from the menu bar you can click 'Run'.
-4) To run all the tests you can 'Run GraphManiTest'.
+3) From the menu bar you can click 'Run'-> 'Run 'GraphMani'.
+4) You can also run the whole project with 'mvn package'. Since there is support for the surefire plugin this command runs the tests as well. 
+5) To run all the tests separately you can 'Run GraphManiTest'.
 
 
 ### List of APIs:
