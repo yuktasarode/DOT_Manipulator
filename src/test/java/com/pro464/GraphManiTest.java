@@ -122,8 +122,8 @@ public class GraphManiTest {
         gm.outputDOTGraph(outputFilePath);
 
 
-        String expectedContent = readFileContent(expectedFilePath);
-        String outputContent = readFileContent(outputFilePath);
+        String expectedContent = readFile(expectedFilePath);
+        String outputContent = readFile(outputFilePath);
 
 
         assertEquals(expectedContent, outputContent);
@@ -131,7 +131,7 @@ public class GraphManiTest {
     }
 
 
-    private String readFileContent(String filePath) {
+    private String readFile(String filePath) {
         try {
             return Files.readString(Paths.get(filePath));
         } catch (IOException err) {
@@ -149,14 +149,14 @@ public class GraphManiTest {
         assertTrue(outFile.exists());
 
         String expectedContent = gm.toString();
-        String fileContent = readFileContent(testFilePath);
+        String fileContent = readFile(testFilePath);
         assertNotNull(fileContent);
         assertEquals(expectedContent, fileContent);
 
 
     }
 
-    private void writeToFile(String content, String filePath) {
+    private void writeFile(String content, String filePath) {
         try {
             Files.write(Paths.get(filePath), content.getBytes());
         } catch (IOException e) {
@@ -172,10 +172,10 @@ public class GraphManiTest {
 
         String output = gm.toString();
 
-        writeToFile(output, outputFilePath);
+        writeFile(output, outputFilePath);
 
 
-        String expectedContent = readFileContent(expectedFilePath);
+        String expectedContent = readFile(expectedFilePath);
 
 
         assertEquals(expectedContent, output);
