@@ -140,6 +140,32 @@ public class GraphMani {
     }
 
 
+    public void removeNode(String label) {
+        if (g.containsVertex(label)) {
+            g.removeVertex(label);
+            System.out.println("Node " + label + " is removed successfully");
+        } else {
+            throw new RuntimeException("Node " + label + " is not present in the graph");
+        }
+    }
+    public void removeNodes(String[] label) {
+        for (String l : label) {
+            removeNode(l);
+        }
+    }
+
+    public void removeEdge(String srcLabel, String dstLabel) {
+        if (g.containsEdge(srcLabel, dstLabel)) {
+            g.removeEdge(srcLabel, dstLabel);
+            System.out.println("Edge is successfully removed between " + srcLabel + " to " + dstLabel);
+        } else {
+            throw new RuntimeException("Edge does not exist between " + srcLabel + " to " + dstLabel);
+        }
+    }
+
+
+
+
 
 
 
@@ -161,6 +187,16 @@ public class GraphMani {
         f.outputDOTGraph("src/main/outGraph.DOT");
 
         f.outputGraphics("src/main/newGraph.png","PNG");
+
+        f.removeNode("e");
+
+        String[] nodesToRemove = {"e","g"};
+        f.removeNodes(nodesToRemove);
+        System.out.println(f.toString());
+
+        f.removeEdge("a","b");
+        System.out.println(f.toString());
+        f.removeEdge("a","b");
 
 
     }

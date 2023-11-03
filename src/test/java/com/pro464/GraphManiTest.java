@@ -183,6 +183,50 @@ public class GraphManiTest {
 
     }
 
+    @Test
+    public void testRemoveNode() throws Exception {
+        gm.removeNode("a");
+        System.out.println(gm.toString());
+
+//        checking number of nodes
+        assertEquals(2,  gm.getGraph().vertexSet().size());
+        assertFalse(gm.getGraph().containsVertex("a"));
+    }
+
+    @Test
+    public void testRemoveNodes() throws Exception {
+        gm.addNode("e");
+        gm.addEdge("e","a");
+        String[] labels = {"a","e","f"};
+        assertThrows(RuntimeException.class, () -> gm.removeNodes(labels));
+        assertFalse(gm.getGraph().containsVertex("a"));
+        assertFalse(gm.getGraph().containsVertex("e"));
+
+//        counting nodes
+        assertEquals(2, gm.getGraph().vertexSet().size());
+
+//        counting edges
+        assertEquals(1,gm.getGraph().edgeSet().size());
+
+
+        assertFalse(gm.getGraph().containsEdge("e","a"));
+    }
+
+    @Test
+    public void testRemoveEdge() throws Exception {
+
+        gm.removeEdge("b", "c");
+        System.out.println(gm.toString());
+
+        assertEquals(3,gm.getGraph().vertexSet().size());
+        assertEquals(1, gm.getGraph().edgeSet().size());
+        assertTrue(gm.getGraph().containsEdge("a", "b"));
+        assertFalse(gm.getGraph().containsEdge("b", "c"));
+
+        assertThrows(RuntimeException.class, () -> gm.removeEdge("b", "c"));
+
+    }
+
 
 
 }
