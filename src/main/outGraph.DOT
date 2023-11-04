@@ -1,15 +1,16 @@
 strict digraph G {
   a;
   b;
-  c;
   d;
-  f;
   e;
+  c;
+  f;
   g;
   h;
   a -> b;
+  a -> d;
+  b -> e;
   b -> c;
-  c -> d;
-  d -> a;
+  c -> e;
   e -> f;
 }

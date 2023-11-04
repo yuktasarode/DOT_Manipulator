@@ -252,7 +252,6 @@ public class GraphMani {
     public static void main(String[] args){
         GraphMani f = new GraphMani();
         f.parseGraph("src/main/sample.DOT");
-
         System.out.println(f.toString());
         f.outputGraph("src/main/outputGraph.txt");
 
@@ -278,7 +277,10 @@ public class GraphMani {
         System.out.println(f.toString());
         f.removeEdge("a","b");
 
-        Path result = f.GraphSearch("a","c");
+        GraphMani new_f = new GraphMani();
+        new_f.parseGraph("src/main/sample2.DOT");
+
+        Path result = new_f.GraphSearch("a","e");
         System.out.println(result.toString());
     }
 }

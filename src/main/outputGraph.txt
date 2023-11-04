@@ -1,4 +1,4 @@
-Total number of nodes: 4
-Total number of edges: 4
-Node Labels: [a, b, c, d]
-Edges: a -> b, b -> c, c -> d, d -> a
+Total number of nodes: 5
+Total number of edges: 5
+Node Labels: [a, b, d, e, c]
+Edges: a -> b, a -> d, b -> e, b -> c, c -> e
