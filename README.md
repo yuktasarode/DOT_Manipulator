@@ -91,8 +91,8 @@ f.removeNodes(nodesToRemove);
 To test removal of edges. I am adding few edges to the graph.
 ```java
 
-        f.addEdge("e","g");
-        f.addEdge("d","e");
+f.addEdge("e","g");
+f.addEdge("d","e");
 ```
 
 9) Remove edge:
