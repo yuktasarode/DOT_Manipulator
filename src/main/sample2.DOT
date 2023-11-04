@@ -3,6 +3,5 @@ digraph {
     a -> d;
     b -> e;
     b-> c;
-c -> e;
-
+    c -> e;
 }

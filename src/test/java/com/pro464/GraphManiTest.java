@@ -231,18 +231,33 @@ public class GraphManiTest {
     public void testBFS(){
         GraphMani g = new GraphMani();
         g.parseGraph("src/test/java/test2.DOT");
-        GraphMani.Path res=g.GraphSearch("a","e");
+        GraphMani.Path res=g.GraphSearch("a","e",GraphMani.algo.BFS);
         String r = res.toString();
         assertEquals("a -> b -> e", r);
 
         g.addNode("f");
-        res=g.GraphSearch("a","f");
+        res=g.GraphSearch("a","f", GraphMani.algo.BFS);
 
         assertEquals(null,res);
 
 
     }
 
+    @Test
+    public void testDFS(){
+        GraphMani g = new GraphMani();
+        g.parseGraph("src/test/java/test2.DOT");
+        GraphMani.Path res=g.GraphSearch("a","e", GraphMani.algo.DFS);
+        String r = res.toString();
+        assertEquals("a -> b -> c -> e", r);
+
+        g.addNode("f");
+        res=g.GraphSearch("a","f", GraphMani.algo.DFS);
+
+        assertEquals(null,res);
+
+
+    }
 
 
 }

@@ -22,8 +22,13 @@ import java.io.StringReader;
 import java.util.Objects;
 import java.util.*;
 
-
 public class GraphMani {
+
+    enum algo {
+        BFS,
+        DFS
+    }
+
 
     public class Path {
         ArrayList<String> nodes;
@@ -56,7 +61,71 @@ public class GraphMani {
         }
     }
 
-    Path GraphSearch(String start, String end) {
+    Path GraphSearch( String start, String end, algo a){
+        Path res = new Path();
+        switch (a){
+            case BFS:
+               res = GraphSearchBFS(start,end);
+                break;
+            case DFS:
+               res = GraphSearchDFS(start,end);
+                break;
+
+
+        }
+
+        return res;
+
+    }
+
+    Path GraphSearchDFS(String start, String end) {
+        Stack<String> stack = new Stack<>();
+        stack.push(start);
+
+        Set<String> visited = new HashSet<>();
+        Map<String, String> parent = new HashMap<>();
+        String target = "";
+
+        while (!stack.isEmpty()) {
+            String currNode = stack.pop();
+            visited.add(currNode);
+
+            if (currNode.equals(end)) {
+                target = currNode;
+                break;
+            }
+
+            for (String v : Graphs.neighborListOf(g, currNode)) {
+                if (!visited.contains(v)) {
+                    parent.put(v, currNode);
+                    stack.push(v);
+                }
+            }
+        }
+        Path path = new Path();
+        if(target.isEmpty()) {
+            return null;
+        } else {
+            Stack<String> pstack = new Stack<>();
+            String u = target;
+            while(true) {
+                pstack.push(u);
+                u = parent.get(u);
+                if (u.equals(start)) {
+                    break;
+                }
+            }
+            path.addNode(start);
+            while(!pstack.isEmpty()) {
+                String node = pstack.pop();
+                path.addNode(node);
+            }
+            return path;
+        }
+    }
+
+
+    Path GraphSearchBFS(String start, String end) {
         Queue<String> queue = new ArrayDeque<>();
         queue.add(start);
         Set<String> visited = new HashSet<>();
@@ -252,6 +321,7 @@ public class GraphMani {
     public static void main(String[] args){
         GraphMani f = new GraphMani();
         f.parseGraph("src/main/sample.DOT");
+
         System.out.println(f.toString());
         f.outputGraph("src/main/outputGraph.txt");
 
@@ -280,7 +350,10 @@ public class GraphMani {
         GraphMani new_f = new GraphMani();
         new_f.parseGraph("src/main/sample2.DOT");
 
-        Path result = new_f.GraphSearch("a","e");
+        Path result = new_f.GraphSearch("a","e", algo.BFS);
         System.out.println(result.toString());
+
+        Path result2 = new_f.GraphSearch("a","e", algo.DFS);
+        System.out.println(result2.toString());
     }
 }
