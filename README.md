@@ -73,6 +73,29 @@ f.outputDOTGraph("src/main/outGraph.DOT");
 ```java
 f.outputGraphics("src/main/newGraph.png","PNG");
 ```
+##  Project Part 2
+
+I have made a new DOT file (sample2.DOT).
+
+```java
+GraphMani new_f = new GraphMani();
+new_f.parseGraph("src/main/sample2.DOT");
+```
+
+8) For BFS Traversal:
+
+```java
+Path result = new_f.GraphSearch("a","e", algo.BFS);
+System.out.println(result.toString());
+
+``` 
+
+9) For DFS Traversal:
+
+```java
+Path result2 = new_f.GraphSearch("a","e", algo.DFS);
+System.out.println(result2.toString());
+```
   
 
 
