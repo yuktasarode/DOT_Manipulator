@@ -258,29 +258,29 @@ public class GraphMani {
         f.parseGraph("src/main/sample2.DOT");
 
         System.out.println(f.toString());
-//        f.outputGraph("src/main/outputGraph.txt");
-//
-//        f.addNode("f");
-//        String[] add_Nodes = {"e","g","a","h"};
-//        f.addNodes(add_Nodes);
-//
-//        f.addEdge("e","f");
-//        System.out.println(f.toString());
-//        f.addEdge("a","b");
-//
-//        f.outputDOTGraph("src/main/outGraph.DOT");
-//
-//        f.outputGraphics("src/main/newGraph.png","PNG");
-//
-//        f.removeNode("e");
+        f.outputGraph("src/main/outputGraph.txt");
 
-//        String[] nodesToRemove = {"e","g"};
-//        f.removeNodes(nodesToRemove);
-//        System.out.println(f.toString());
-//
-//        f.removeEdge("a","b");
-//        System.out.println(f.toString());
-//        f.removeEdge("a","b");
+        f.addNode("f");
+        String[] add_Nodes = {"e","g","a","h"};
+        f.addNodes(add_Nodes);
+
+        f.addEdge("e","f");
+        System.out.println(f.toString());
+        f.addEdge("a","b");
+
+        f.outputDOTGraph("src/main/outGraph.DOT");
+
+        f.outputGraphics("src/main/newGraph.png","PNG");
+
+        f.removeNode("e");
+
+        String[] nodesToRemove = {"e","g"};
+        f.removeNodes(nodesToRemove);
+        System.out.println(f.toString());
+
+        f.removeEdge("a","b");
+        System.out.println(f.toString());
+        f.removeEdge("a","b");
 
         Path result = f.GraphSearch("a","e");
         System.out.println(result.toString());
