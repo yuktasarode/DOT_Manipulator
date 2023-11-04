@@ -68,7 +68,7 @@ f.addEdge("e","f");
 f.outputDOTGraph("src/main/outGraph.DOT");
 ```
 
-7) To output the graph in PNG format:
+6) To output the graph in PNG format:
 
 ```java
 f.outputGraphics("src/main/newGraph.png","PNG");
@@ -77,12 +77,12 @@ f.outputGraphics("src/main/newGraph.png","PNG");
 
 
 
-8) Remove node:
+7) Remove node:
 ```java
 f.removeNode("e");
 ```
 
-10) Remove nodes:
+8) Remove nodes:
 ```java
 String[] nodesToRemove = {"h","g"};
 f.removeNodes(nodesToRemove);
@@ -95,7 +95,7 @@ To test removal of edges. I am adding few edges to the graph.
         f.addEdge("d","e");
 ```
 
-12) Remove edge:
+9) Remove edge:
 ```java
  f.removeEdge("a","b");
 ``` 
@@ -107,7 +107,7 @@ GraphMani new_f = new GraphMani();
 new_f.parseGraph("src/main/sample2.DOT");
 ```
 
-8) For BFS Traversal:
+10) For BFS Traversal:
 
 ```java
 Path result = new_f.GraphSearch("a","e", algo.BFS);
@@ -115,7 +115,7 @@ System.out.println(result.toString());
 
 ``` 
 
-9) For DFS Traversal:
+11) For DFS Traversal:
 
 ```java
 Path result2 = new_f.GraphSearch("a","e", algo.DFS);
