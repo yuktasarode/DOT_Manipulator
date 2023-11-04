@@ -227,6 +227,22 @@ public class GraphManiTest {
 
     }
 
+    @Test
+    public void testBFS(){
+        GraphMani g = new GraphMani();
+        g.parseGraph("src/test/java/test2.DOT");
+        GraphMani.Path res=g.GraphSearch("a","e");
+        String r = res.toString();
+        assertEquals("a -> b -> e", r);
+
+        g.addNode("f");
+        res=g.GraphSearch("a","f");
+
+        assertEquals(null,res);
+
+
+    }
+
 
 
 }

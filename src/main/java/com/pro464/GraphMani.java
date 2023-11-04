@@ -81,7 +81,7 @@ public class GraphMani {
         }
         Path path = new Path();
         if(target.isEmpty()) {
-            return path;
+            return null;
         } else {
             Stack<String> stack = new Stack<>();
             String u = target;
