@@ -83,7 +83,7 @@ public class GraphMani {
         }
         Path path = new Path();
         if(target.isEmpty()) {
-            return path;
+            return null;
         } else {
             Stack<String> pstack = new Stack<>();
             String u = target;
@@ -254,35 +254,38 @@ public class GraphMani {
 
 
     public static void main(String[] args){
-        GraphMani f = new GraphMani();
-        f.parseGraph("src/main/sample2.DOT");
+//        GraphMani f = new GraphMani();
+//        f.parseGraph("src/main/sample.DOT");
+//
+//        System.out.println(f.toString());
+//        f.outputGraph("src/main/outputGraph.txt");
+//
+//        f.addNode("f");
+//        String[] add_Nodes = {"e","g","a","h"};
+//        f.addNodes(add_Nodes);
+//
+//        f.addEdge("e","f");
+//        System.out.println(f.toString());
+//        f.addEdge("a","b");
+//
+//        f.outputDOTGraph("src/main/outGraph.DOT");
+//
+//        f.outputGraphics("src/main/newGraph.png","PNG");
+//
+//        f.removeNode("e");
+//
+//        String[] nodesToRemove = {"e","g"};
+//        f.removeNodes(nodesToRemove);
+//        System.out.println(f.toString());
+//
+//        f.removeEdge("a","b");
+//        System.out.println(f.toString());
+//        f.removeEdge("a","b");
 
-        System.out.println(f.toString());
-        f.outputGraph("src/main/outputGraph.txt");
+        GraphMani new_f = new GraphMani();
+        new_f.parseGraph("src/main/sample2.DOT");
 
-        f.addNode("f");
-        String[] add_Nodes = {"e","g","a","h"};
-        f.addNodes(add_Nodes);
-
-        f.addEdge("e","f");
-        System.out.println(f.toString());
-        f.addEdge("a","b");
-
-        f.outputDOTGraph("src/main/outGraph.DOT");
-
-        f.outputGraphics("src/main/newGraph.png","PNG");
-
-        f.removeNode("e");
-
-        String[] nodesToRemove = {"e","g"};
-        f.removeNodes(nodesToRemove);
-        System.out.println(f.toString());
-
-        f.removeEdge("a","b");
-        System.out.println(f.toString());
-        f.removeEdge("a","b");
-
-        Path result = f.GraphSearch("a","e");
+        Path result = new_f.GraphSearch("a","e");
         System.out.println(result.toString());
 
 

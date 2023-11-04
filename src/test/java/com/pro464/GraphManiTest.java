@@ -23,7 +23,6 @@ public class GraphManiTest {
         gm.parseGraph("src/test/java/test.DOT");
     }
 
-
     @AfterEach
     void deletefiles(){
 
@@ -213,7 +212,7 @@ public class GraphManiTest {
     }
 
     @Test
-    public void testRemoveEdge() throws Exception {
+    public void testRemoveEdge() {
 
         gm.removeEdge("b", "c");
         System.out.println(gm.toString());
@@ -224,6 +223,22 @@ public class GraphManiTest {
         assertFalse(gm.getGraph().containsEdge("b", "c"));
 
         assertThrows(RuntimeException.class, () -> gm.removeEdge("b", "c"));
+
+    }
+
+    @Test
+    public void testDFS(){
+        GraphMani g = new GraphMani();
+        g.parseGraph("src/test/java/test2.DOT");
+       GraphMani.Path res=g.GraphSearch("a","e");
+       String r = res.toString();
+       assertEquals("a -> b -> c -> e", r);
+
+       g.addNode("f");
+       res=g.GraphSearch("a","f");
+
+       assertEquals(null,res);
+
 
     }
 
