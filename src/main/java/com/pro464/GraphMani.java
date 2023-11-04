@@ -4,6 +4,7 @@ import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.layout.mxIGraphLayout;
 import com.mxgraph.util.mxCellRenderer;
 import org.jgrapht.Graph;
+import org.jgrapht.Graphs;
 import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
@@ -19,9 +20,92 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.StringReader;
 import java.util.Objects;
-
+import java.util.*;
 
 public class GraphMani {
+
+
+    public class Path {
+        ArrayList<String> nodes;
+
+        Path() {
+            nodes = new ArrayList<>();
+        }
+
+        public void addNode(String node) {
+            this.nodes.add(node);
+        }
+
+        public boolean containsNode(String searchNode) {
+            for (String node : nodes) {
+                if (searchNode.equals(node)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public String toString() {
+            String output = "";
+            for(int i=0; i<nodes.size()-1; i++) {
+                output += nodes.get(i) + " -> ";
+            }
+            output += nodes.get(nodes.size()-1);
+            return output;
+        }
+    }
+
+
+    Path GraphSearch(String start, String end) {
+        Stack<String> stack = new Stack<>();
+        stack.push(start);
+
+        Set<String> visited = new HashSet<>();
+        Map<String, String> parent = new HashMap<>();
+        String target = "";
+
+        while (!stack.isEmpty()) {
+            String currNode = stack.pop();
+            visited.add(currNode);
+
+            if (currNode.equals(end)) {
+                target = currNode;
+                break;
+            }
+
+            for (String v : Graphs.neighborListOf(g, currNode)) {
+                if (!visited.contains(v)) {
+                    parent.put(v, currNode);
+                    stack.push(v);
+                }
+            }
+        }
+        Path path = new Path();
+        if(target.isEmpty()) {
+            return path;
+        } else {
+            Stack<String> pstack = new Stack<>();
+            String u = target;
+            while(true) {
+                pstack.push(u);
+                u = parent.get(u);
+                if (u.equals(start)) {
+                    break;
+                }
+            }
+            path.addNode(start);
+            while(!pstack.isEmpty()) {
+                String node = pstack.pop();
+                path.addNode(node);
+            }
+            return path;
+        }
+    }
+
+
+
+
     private Graph<String, DefaultEdge> g;
 
     void parseGraph(String filePath) {
@@ -171,32 +255,35 @@ public class GraphMani {
 
     public static void main(String[] args){
         GraphMani f = new GraphMani();
-        f.parseGraph("src/main/sample.DOT");
+        f.parseGraph("src/main/sample2.DOT");
 
         System.out.println(f.toString());
-        f.outputGraph("src/main/outputGraph.txt");
+//        f.outputGraph("src/main/outputGraph.txt");
+//
+//        f.addNode("f");
+//        String[] add_Nodes = {"e","g","a","h"};
+//        f.addNodes(add_Nodes);
+//
+//        f.addEdge("e","f");
+//        System.out.println(f.toString());
+//        f.addEdge("a","b");
+//
+//        f.outputDOTGraph("src/main/outGraph.DOT");
+//
+//        f.outputGraphics("src/main/newGraph.png","PNG");
+//
+//        f.removeNode("e");
 
-        f.addNode("f");
-        String[] add_Nodes = {"e","g","a","h"};
-        f.addNodes(add_Nodes);
+//        String[] nodesToRemove = {"e","g"};
+//        f.removeNodes(nodesToRemove);
+//        System.out.println(f.toString());
+//
+//        f.removeEdge("a","b");
+//        System.out.println(f.toString());
+//        f.removeEdge("a","b");
 
-        f.addEdge("e","f");
-        System.out.println(f.toString());
-        f.addEdge("a","b");
-
-        f.outputDOTGraph("src/main/outGraph.DOT");
-
-        f.outputGraphics("src/main/newGraph.png","PNG");
-
-        f.removeNode("e");
-
-        String[] nodesToRemove = {"e","g"};
-        f.removeNodes(nodesToRemove);
-        System.out.println(f.toString());
-
-        f.removeEdge("a","b");
-        System.out.println(f.toString());
-        f.removeEdge("a","b");
+        Path result = f.GraphSearch("a","e");
+        System.out.println(result.toString());
 
 
     }
