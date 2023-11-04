@@ -75,6 +75,31 @@ f.outputGraphics("src/main/newGraph.png","PNG");
 ```
 ##  Project Part 2
 
+
+
+8) Remove node:
+```java
+f.removeNode("e");
+```
+
+10) Remove nodes:
+```java
+String[] nodesToRemove = {"h","g"};
+f.removeNodes(nodesToRemove);
+```
+
+To test removal of edges. I am adding few edges to the graph.
+```java
+
+        f.addEdge("e","g");
+        f.addEdge("d","e");
+```
+
+12) Remove edge:
+```java
+ f.removeEdge("a","b");
+``` 
+
 I have made a new DOT file (sample2.DOT).
 
 ```java
