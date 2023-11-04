@@ -321,8 +321,8 @@ public class GraphMani {
     public static void main(String[] args){
         GraphMani f = new GraphMani();
         f.parseGraph("src/main/sample.DOT");
-
         System.out.println(f.toString());
+
         f.outputGraph("src/main/outputGraph.txt");
 
         f.addNode("f");
@@ -337,23 +337,31 @@ public class GraphMani {
 
         f.outputGraphics("src/main/newGraph.png","PNG");
 
-        f.removeNode("e");
+        System.out.println("=================================Part 2===============================");
+        //Project part 2
 
-        String[] nodesToRemove = {"e","g"};
+        f.addEdge("e","g");
+        f.addEdge("d","e");
+
+        f.removeNode("e");
+        System.out.println(f.toString());
+
+
+        String[] nodesToRemove = {"h","g"};
         f.removeNodes(nodesToRemove);
         System.out.println(f.toString());
 
         f.removeEdge("a","b");
         System.out.println(f.toString());
-        f.removeEdge("a","b");
+
 
         GraphMani new_f = new GraphMani();
         new_f.parseGraph("src/main/sample2.DOT");
 
         Path result = new_f.GraphSearch("a","e", algo.BFS);
-        System.out.println(result.toString());
+        System.out.println("BFS: "+ result.toString());
 
         Path result2 = new_f.GraphSearch("a","e", algo.DFS);
-        System.out.println(result2.toString());
+        System.out.println("DFS: " +result2.toString());
     }
 }
