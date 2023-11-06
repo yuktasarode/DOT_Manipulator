@@ -191,6 +191,8 @@ public class GraphManiTest {
 //        checking number of nodes
         assertEquals(2,  gm.getGraph().vertexSet().size());
         assertFalse(gm.getGraph().containsVertex("a"));
+        assertThrows(RuntimeException.class, () -> gm.removeNode("a"));
+
     }
 
     @Test
