@@ -29,6 +29,8 @@ public class GraphMani {
         DFS
     }
 
+    private static final String PNG_IMG_FORMAT = "PNG";
+
 
     public class Path {
         ArrayList<String> nodes;
@@ -278,8 +280,8 @@ public class GraphMani {
         BufferedImage image = mxCellRenderer.createBufferedImage(gAdpt, null, 2, Color.WHITE, true, null);
         File imgFile = new File(path);
         try {
-            if(Objects.equals(format, "PNG")) {
-                ImageIO.write(image, "PNG", imgFile);
+            if(Objects.equals(format, PNG_IMG_FORMAT)) {
+                ImageIO.write(image, PNG_IMG_FORMAT, imgFile);
                 System.out.println("Successfully saved image of graph to " + path);
             }
         } catch (IOException err) {
