@@ -31,6 +31,8 @@ public class GraphMani {
 
     private static final String PNG_IMG_FORMAT = "PNG";
 
+    private Graph<String, DefaultEdge> g;
+
 
     public class Path {
         ArrayList<String> nodes;
@@ -173,7 +175,7 @@ public class GraphMani {
     }
 
 
-    private Graph<String, DefaultEdge> g;
+
 
     void parseGraph(String filePath) {
         String graphC = null;
