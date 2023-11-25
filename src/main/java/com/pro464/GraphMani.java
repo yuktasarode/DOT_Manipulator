@@ -214,14 +214,18 @@ public class GraphMani {
         str.append("Total number of edges: ").append(g.edgeSet().size()).append("\n");
         str.append("Node Labels: ").append(g.vertexSet()).append("\n");
         str.append("Edges: ");
-        for (DefaultEdge e : g.edgeSet()) {
+
+        g.edgeSet().forEach(e -> {
             String src = g.getEdgeSource(e);
             String trg = g.getEdgeTarget(e);
             str.append(src).append(" -> ").append(trg).append(", ");
+        });
+
+        if (str.length() > 2) {
+            str.setLength(str.length() - 2);
         }
-        String res = str.toString();
-        res=res.substring(0, res.length() - 2);
-        return res;
+
+        return str.toString();
     }
 
     void outputGraph(String filePath){
@@ -323,11 +327,6 @@ public class GraphMani {
             throw new RuntimeException("Edge does not exist between " + srcLabel + " to " + dstLabel);
         }
     }
-
-
-
-
-
 
 
     public static void main(String[] args){
