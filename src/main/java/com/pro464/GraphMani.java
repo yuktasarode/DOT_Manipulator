@@ -178,20 +178,28 @@ public class GraphMani {
 
 
     void parseGraph(String filePath) {
-        String graphC = null;
-        try {
-            graphC = Files.readString(Paths.get(filePath));
-        } catch (IOException err) {
-            err.printStackTrace();
-        }
 
+        try {
+            String graphC = Files.readString(Paths.get(filePath));
+            parseGraphHelper(graphC);
+        } catch (IOException err) {
+            System.err.println("Error reading this file: "+err.getMessage());
+        }
+    }
+
+    private void parseGraphHelper(String graphC){
         g = new SimpleDirectedGraph<>(DefaultEdge.class);
 
         DOTImporter<String, DefaultEdge> dotImp = new DOTImporter<>();
         dotImp.setVertexFactory(label -> label);
-        dotImp.importGraph(g, new StringReader(graphC));
 
+        try{
+            dotImp.importGraph(g, new StringReader(graphC));
 
+        }
+        catch(Exception err){
+            System.err.println("Error parsing the content of the graph: "+err.getMessage());
+        }
 
     }
 
