@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.StringReader;
+import java.util.List;
 import java.util.Objects;
 import java.util.*;
 
@@ -35,23 +36,18 @@ public class GraphMani {
 
 
     public class Path {
-        ArrayList<String> nodes;
+        private List<String> nodes;
 
         Path() {
             nodes = new ArrayList<>();
         }
 
         public void addNode(String node) {
-            this.nodes.add(node);
+            nodes.add(node);
         }
 
         public boolean containsNode(String searchNode) {
-            for (String node : nodes) {
-                if (searchNode.equals(node)) {
-                    return true;
-                }
-            }
-            return false;
+            return nodes.contains(searchNode);
         }
 
         @Override
