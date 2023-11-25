@@ -56,12 +56,7 @@ public class GraphMani {
 
         @Override
         public String toString() {
-            String output = "";
-            for(int i=0; i<nodes.size()-1; i++) {
-                output += nodes.get(i) + " -> ";
-            }
-            output += nodes.get(nodes.size()-1);
-            return output;
+            return String.join(" -> ", nodes);
         }
     }
 
