@@ -35,8 +35,11 @@ public class GraphMani {
     private Graph<String, DefaultEdge> g;
 
 
-    public class Path {
+    public static class Path {
         private List<String> nodes;
+        public boolean isEmpty() {
+            return nodes.isEmpty();
+        }
 
         Path() {
             nodes = new ArrayList<>();
@@ -60,10 +63,12 @@ public class GraphMani {
         Path res = new Path();
         switch (a){
             case BFS:
-               res = GraphSearchBFS(start,end);
+                BFSGraphSearch bfsSearch = new BFSGraphSearch(g);
+                res = bfsSearch.graphSearch(start, end);
                 break;
             case DFS:
-               res = GraphSearchDFS(start,end);
+                DFSGraphSearch dfsSearch = new DFSGraphSearch(g);
+                res = dfsSearch.graphSearch(start, end);
                 break;
 
 
