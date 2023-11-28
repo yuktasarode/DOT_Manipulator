@@ -240,7 +240,7 @@ public class GraphManiTest {
         g.addNode("f");
         res=g.GraphSearch("a","f", GraphMani.algo.BFS);
 
-        assertEquals(null,res);
+        assertEquals(0, res.toString().length());
 
 
     }
@@ -256,7 +256,7 @@ public class GraphManiTest {
         g.addNode("f");
         res=g.GraphSearch("a","f", GraphMani.algo.DFS);
 
-        assertEquals(null,res);
+        assertEquals(0, res.toString().length());
 
 
     }
