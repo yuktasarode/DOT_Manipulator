@@ -60,21 +60,20 @@ public class GraphMani {
     }
 
     Path GraphSearch( String start, String end, algo a){
-        Path res = new Path();
+
+        Algo algointerface = null;
         switch (a){
             case BFS:
-                BFSGraphSearch bfsSearch = new BFSGraphSearch(g);
-                res = bfsSearch.graphSearch(start, end);
-                break;
-            case DFS:
-                DFSGraphSearch dfsSearch = new DFSGraphSearch(g);
-                res = dfsSearch.graphSearch(start, end);
+                algointerface = new BFSAlgo();
                 break;
 
+            case DFS:
+                algointerface = new DFSAlgo();
+                break;
 
         }
 
-        return res;
+        return algointerface.execute(g, start, end);
 
     }
 
@@ -370,5 +369,22 @@ public class GraphMani {
 
         Path result2 = new_f.GraphSearch("a","e", algo.DFS);
         System.out.println("DFS: " +result2.toString());
+
+        System.out.println("=================================Part 3===============================");
+
+        GraphMani BFS_Sp = new GraphMani();
+        BFS_Sp.parseGraph("src/main/sample2.DOT");
+
+        Path resBFS_Sp = BFS_Sp.GraphSearch("a", "e", algo.BFS);
+        System.out.println("BFS: "+ resBFS_Sp.toString());
+
+        GraphMani DFS_Sp = new GraphMani();
+        DFS_Sp.parseGraph("src/main/sample2.DOT");
+
+        Path resDFS_Sp = BFS_Sp.GraphSearch("a", "e", algo.DFS);
+        System.out.println("DFS: "+ resDFS_Sp.toString());
+
+
+
     }
 }
