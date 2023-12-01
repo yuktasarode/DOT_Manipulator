@@ -5,9 +5,13 @@ import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultEdge;
 import java.util.*;
 
-public class DFSAlgo implements Algo {
+public class DFSAlgo extends GraphSearchTemplate implements Algo {
+    public DFSAlgo(Graph<String, DefaultEdge> graph) {
+        super(graph);
+    }
+
     @Override
-    public GraphMani.Path execute(Graph<String, DefaultEdge> graph, String src, String dst) {
+    public GraphMani.Path execute(Graph<String,DefaultEdge> graph, String src, String dst) {
 
 
         Stack<String> stack = new Stack<>();
@@ -34,26 +38,6 @@ public class DFSAlgo implements Algo {
             }
         }
         GraphMani.Path path = new GraphMani.Path();
-        if (target.isEmpty()) {
-            return path;
-        } else {
-            Stack<String> pstack = new Stack<>();
-            String u = target;
-            while (true) {
-                pstack.push(u);
-                u = parent.get(u);
-                if (u.equals(src)) {
-                    break;
-                }
-            }
-            path.addNode(src);
-            while (!pstack.isEmpty()) {
-                String node = pstack.pop();
-                path.addNode(node);
-            }
-            return path;
-
-
-        }
+        return processResult(src, target, parent, path);
     }
 }

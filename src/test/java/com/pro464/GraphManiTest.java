@@ -261,4 +261,21 @@ public class GraphManiTest {
 
     }
 
+    @Test
+    public void testRWS(){
+        GraphMani g = new GraphMani();
+        g.parseGraph("src/test/java/test2.DOT");
+        GraphMani.Path res=g.GraphSearch("a","c", GraphMani.algo.RWS);
+        assertNotNull(res);
+
+
+        assertEquals("a -> b -> c", res.toString());
+
+
+
+
+
+    }
+
+
 }

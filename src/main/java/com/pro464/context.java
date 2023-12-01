@@ -10,8 +10,8 @@ public class context {
     public context(Algo algointerface){
         this.algointerface = algointerface;
     }
-    public GraphMani.Path execute(Graph<String, DefaultEdge> graph, String src, String dst) {
-        return this.algointerface.execute(graph, src, dst);
+    public GraphMani.Path execute(Graph<String, DefaultEdge> g, String src, String dst) {
+        return this.algointerface.execute( g, src, dst);
     }
 
 }

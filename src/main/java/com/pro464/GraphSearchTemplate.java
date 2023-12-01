@@ -12,14 +12,8 @@ abstract class GraphSearchTemplate {
     public GraphSearchTemplate(Graph<String,DefaultEdge> graph) {
         this.graph = graph;
     }
-    protected abstract GraphMani.Path searchAlgorithm(String start, String end);
+    protected abstract GraphMani.Path execute(Graph<String,DefaultEdge> graph, String start, String end);
 
-    public GraphMani.Path graphSearch(String start, String end) {
-        GraphMani.Path res = new GraphMani.Path();
-        res = searchAlgorithm(start, end);
-        // Common steps for processing the result can go here
-        return res;
-    }
 
     protected GraphMani.Path processResult(String start, String target, Map<String, String> parent, GraphMani.Path path) {
         if (target.isEmpty()) {
@@ -53,7 +47,7 @@ class BFSGraphSearch extends GraphSearchTemplate {
     }
 
     @Override
-    protected GraphMani.Path searchAlgorithm(String start, String end) {
+    protected GraphMani.Path execute(Graph<String,DefaultEdge> graph,String start, String end) {
         Queue<String> queue = new ArrayDeque<>();
         queue.add(start);
         Set<String> visited = new HashSet<>();
@@ -90,7 +84,7 @@ class DFSGraphSearch extends GraphSearchTemplate {
     }
 
     @Override
-    protected GraphMani.Path searchAlgorithm(String start, String end) {
+    protected GraphMani.Path execute(Graph<String,DefaultEdge> graph, String start, String end) {
         Stack<String> stack = new Stack<>();
         stack.push(start);
         Set<String> visited = new HashSet<>();

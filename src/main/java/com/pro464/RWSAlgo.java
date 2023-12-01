@@ -4,9 +4,15 @@ import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultEdge;
 import java.util.*;
-public class RWSAlgo implements Algo {
+public class RWSAlgo extends GraphSearchTemplate implements Algo {
+
+
+    public RWSAlgo(Graph<String, DefaultEdge> graph) {
+        super(graph);
+    }
+
     @Override
-    public GraphMani.Path execute(Graph<String, DefaultEdge> graph, String src, String dst) {
+    public GraphMani.Path execute(Graph<String,DefaultEdge> graph, String src, String dst) {
         Queue<String> queue = new ArrayDeque<>();
         queue.add(src);
         Set<String> visited = new HashSet<>();
@@ -21,10 +27,8 @@ public class RWSAlgo implements Algo {
             System.out.print(currNode+" ");
 
             List<String> successors = Graphs.successorListOf(graph, currNode);
-            System.out.println(successors);
-            if (successors == null) {
-                continue; // Skip if successors are null
-            }
+
+
 
             List<String> shuffledSuccessors = new ArrayList<>(successors);
             Collections.shuffle(shuffledSuccessors, random); // Shuffle the successors randomly
@@ -46,24 +50,6 @@ public class RWSAlgo implements Algo {
         }
 
         GraphMani.Path path = new GraphMani.Path();
-        if (target.isEmpty()) {
-            return path;
-        } else {
-            Stack<String> stack = new Stack<>();
-            String u = target;
-            while (true) {
-                stack.push(u);
-                u = parent.get(u);
-                if (u.equals(src)) {
-                    break;
-                }
-            }
-            path.addNode(src);
-            while (!stack.isEmpty()) {
-                String node = stack.pop();
-                path.addNode(node);
-            }
-            return path;
-        }
+        return processResult(src, target, parent, path);
     }
     }

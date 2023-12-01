@@ -66,15 +66,15 @@ public class GraphMani {
         context c = null;
         switch (a){
             case BFS:
-                algointerface = new BFSAlgo();
+                algointerface = new BFSAlgo(g);
                 break;
 
             case DFS:
-                algointerface = new DFSAlgo();
+                algointerface = new DFSAlgo(g);
                 break;
 
             case RWS:
-                algointerface = new RWSAlgo();
+                algointerface = new RWSAlgo(g);
                 break;
         }
         c = new context(algointerface);
@@ -394,10 +394,11 @@ public class GraphMani {
 
         GraphMani RWS_Sp = new GraphMani();
         RWS_Sp.parseGraph("src/main/input2.dot");
-        System.out.println(RWS_Sp);
 
 
+        System.out.println("Random Walk: ");
         Path resRWS_Sp = RWS_Sp.GraphSearch("a", "c", algo.RWS);
+        System.out.println();
         System.out.println("RWS: "+ resRWS_Sp.toString());
 
 

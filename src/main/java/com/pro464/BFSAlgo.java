@@ -6,9 +6,13 @@ import org.jgrapht.graph.DefaultEdge;
 
 import java.util.*;
 
-public class BFSAlgo implements Algo {
+public class BFSAlgo extends GraphSearchTemplate implements Algo {
+    public BFSAlgo(Graph<String, DefaultEdge> graph) {
+        super(graph);
+    }
+
     @Override
-    public GraphMani.Path execute(Graph<String, DefaultEdge> graph, String src, String dst) {
+    public GraphMani.Path execute(Graph<String,DefaultEdge> graph, String src, String dst) {
 
         Queue<String> queue = new ArrayDeque<>();
         queue.add(src);
@@ -33,24 +37,6 @@ public class BFSAlgo implements Algo {
             }
         }
         GraphMani.Path path = new GraphMani.Path();
-        if (target.isEmpty()) {
-            return path;
-        } else {
-            Stack<String> stack = new Stack<>();
-            String u = target;
-            while (true) {
-                stack.push(u);
-                u = parent.get(u);
-                if (u.equals(src)) {
-                    break;
-                }
-            }
-            path.addNode(src);
-            while (!stack.isEmpty()) {
-                String node = stack.pop();
-                path.addNode(node);
-            }
-            return path;
-        }
+        return processResult(src, target, parent, path);
     }
 }
