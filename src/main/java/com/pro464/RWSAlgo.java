@@ -31,7 +31,7 @@ public class RWSAlgo extends GraphSearchTemplate implements Algo {
 
 
             List<String> shuffledSuccessors = new ArrayList<>(successors);
-            Collections.shuffle(shuffledSuccessors, random); // Shuffle the successors randomly
+            Collections.shuffle(shuffledSuccessors, random);
 
             for (String v : shuffledSuccessors) {
                 parent.put(v, currNode);
