@@ -63,7 +63,7 @@ public class GraphMani {
     Path GraphSearch( String start, String end, algo a){
 
         Algo algointerface = null;
-        context c = null;
+        context c ;
         switch (a){
             case BFS:
                 algointerface = new BFSAlgo(g);
@@ -380,22 +380,17 @@ public class GraphMani {
 
         GraphMani BFS_Sp = new GraphMani();
         BFS_Sp.parseGraph("src/main/sample2.DOT");
-
         Path resBFS_Sp = BFS_Sp.GraphSearch("a", "e", algo.BFS);
         System.out.println("BFS: "+ resBFS_Sp.toString());
 
         GraphMani DFS_Sp = new GraphMani();
         DFS_Sp.parseGraph("src/main/sample2.DOT");
-
-
-        Path resDFS_Sp = BFS_Sp.GraphSearch("a", "e", algo.DFS);
+        Path resDFS_Sp = DFS_Sp.GraphSearch("a", "e", algo.DFS);
         System.out.println("DFS: "+ resDFS_Sp.toString());
 
 
         GraphMani RWS_Sp = new GraphMani();
         RWS_Sp.parseGraph("src/main/input2.dot");
-
-
         System.out.println("Random Walk: ");
         Path resRWS_Sp = RWS_Sp.GraphSearch("a", "c", algo.RWS);
         System.out.println();

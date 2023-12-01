@@ -39,6 +39,7 @@ public class RWSAlgo extends GraphSearchTemplate implements Algo {
                 if (!visited.contains(v)) {
                     if (v.equals(dst)) {
                         target = v;
+                        System.out.print(target+" ");
                         break;
                     }
                     queue.add(v);
