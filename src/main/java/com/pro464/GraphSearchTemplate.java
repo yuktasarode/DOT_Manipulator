@@ -23,8 +23,7 @@ abstract class GraphSearchTemplate {
 
     protected GraphMani.Path processResult(String start, String target, Map<String, String> parent, GraphMani.Path path) {
         if (target.isEmpty()) {
-            // Handle case where target is not found
-            // You might want to throw an exception or handle it based on your requirements
+            return null;
         } else {
             Stack<String> stack = new Stack<>();
             String u = target;

@@ -27,7 +27,8 @@ public class GraphMani {
 
     enum algo {
         BFS,
-        DFS
+        DFS,
+        RWS
     }
 
     private static final String PNG_IMG_FORMAT = "PNG";
@@ -62,6 +63,7 @@ public class GraphMani {
     Path GraphSearch( String start, String end, algo a){
 
         Algo algointerface = null;
+        context c = null;
         switch (a){
             case BFS:
                 algointerface = new BFSAlgo();
@@ -71,9 +73,13 @@ public class GraphMani {
                 algointerface = new DFSAlgo();
                 break;
 
+            case RWS:
+                algointerface = new RWSAlgo();
+                break;
         }
+        c = new context(algointerface);
 
-        return algointerface.execute(g, start, end);
+        return c.execute(g, start, end);
 
     }
 
@@ -381,8 +387,18 @@ public class GraphMani {
         GraphMani DFS_Sp = new GraphMani();
         DFS_Sp.parseGraph("src/main/sample2.DOT");
 
+
         Path resDFS_Sp = BFS_Sp.GraphSearch("a", "e", algo.DFS);
         System.out.println("DFS: "+ resDFS_Sp.toString());
+
+
+        GraphMani RWS_Sp = new GraphMani();
+        RWS_Sp.parseGraph("src/main/input2.dot");
+        System.out.println(RWS_Sp);
+
+
+        Path resRWS_Sp = RWS_Sp.GraphSearch("a", "c", algo.RWS);
+        System.out.println("RWS: "+ resRWS_Sp.toString());
 
 
 
