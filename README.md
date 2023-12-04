@@ -123,5 +123,56 @@ System.out.println(result2.toString());
 ```
   
 
+##  Project Part 3
 
+12) The 6 refactors were:
+    
+   -Magic strings like "PNG" is replaced with constants to improve code maintainability
+    
+   -Made variable declaration location consistent and clear at the top of the code
+   
+   -Separate the graph parsing logic from the graph file reading in the parseGraph method. This allows for better error handling and more meaningful error messages.
+   
+   -Simplified the construction of the edges section in the toString method using the forEach loop for clarity and simplicity.
+   
+   -Improved the logic of toString() in Path class by making it concise and improving readability.
+   
+   -Refactored the Path class to use the List interface and used contains in containsNode function, made it concise and simplified it.
+
+14) For Template Pattern:
+```java
+GraphMani new_f = new GraphMani();
+new_f.parseGraph("src/main/sample2.DOT");
+
+Path result = new_f.GraphSearch("a","e", algo.BFS);
+System.out.println("BFS: "+ result.toString());
+
+Path result2 = new_f.GraphSearch("a","e", algo.DFS);
+System.out.println("DFS: " +result2.toString());
+```
+
+
+14) For Strategy Pattern:
+```java
+GraphMani BFS_Sp = new GraphMani();
+BFS_Sp.parseGraph("src/main/sample2.DOT");
+Path resBFS_Sp = BFS_Sp.GraphSearch("a", "e", algo.BFS);
+System.out.println("BFS: "+ resBFS_Sp.toString());
+
+GraphMani DFS_Sp = new GraphMani();
+DFS_Sp.parseGraph("src/main/sample2.DOT");
+Path resDFS_Sp = DFS_Sp.GraphSearch("a", "e", algo.DFS);
+System.out.println("DFS: "+ resDFS_Sp.toString());
+```
+
+
+15) For Random Walk:
+```java
+GraphMani RWS_Sp = new GraphMani();
+RWS_Sp.parseGraph("src/main/input2.dot");
+System.out.println("Random Walk: ");
+Path resRWS_Sp = RWS_Sp.GraphSearch("a", "c", algo.RWS);
+System.out.println();
+System.out.println("RWS: "+ resRWS_Sp.toString());
+```
 
