@@ -239,8 +239,7 @@ public class GraphManiTest {
 
         g.addNode("f");
         res=g.GraphSearch("a","f", GraphMani.algo.BFS);
-
-        assertEquals(null,res);
+        assertNull(res);
 
 
     }
@@ -255,8 +254,23 @@ public class GraphManiTest {
 
         g.addNode("f");
         res=g.GraphSearch("a","f", GraphMani.algo.DFS);
+        assertNull(res);
 
-        assertEquals(null,res);
+
+    }
+
+    @Test
+    public void testRWS(){
+        GraphMani g = new GraphMani();
+        g.parseGraph("src/test/java/test2.DOT");
+        GraphMani.Path res=g.GraphSearch("a","c", GraphMani.algo.RWS);
+        assertNotNull(res);
+        assertEquals("a -> b -> c", res.toString());
+
+        g.addNode("f");
+        res=g.GraphSearch("a","f", GraphMani.algo.RWS);
+        assertNull(res);
+
 
 
     }

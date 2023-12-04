@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.StringReader;
+import java.util.List;
 import java.util.Objects;
 import java.util.*;
 
@@ -26,55 +27,59 @@ public class GraphMani {
 
     enum algo {
         BFS,
-        DFS
+        DFS,
+        RWS
     }
 
+    private static final String PNG_IMG_FORMAT = "PNG";
 
-    public class Path {
-        ArrayList<String> nodes;
+    private Graph<String, DefaultEdge> g;
+
+
+    public static class Path {
+        private List<String> nodes;
+        public boolean isEmpty() {
+            return nodes.isEmpty();
+        }
 
         Path() {
             nodes = new ArrayList<>();
         }
 
         public void addNode(String node) {
-            this.nodes.add(node);
+            nodes.add(node);
         }
 
         public boolean containsNode(String searchNode) {
-            for (String node : nodes) {
-                if (searchNode.equals(node)) {
-                    return true;
-                }
-            }
-            return false;
+            return nodes.contains(searchNode);
         }
 
         @Override
         public String toString() {
-            String output = "";
-            for(int i=0; i<nodes.size()-1; i++) {
-                output += nodes.get(i) + " -> ";
-            }
-            output += nodes.get(nodes.size()-1);
-            return output;
+            return String.join(" -> ", nodes);
         }
     }
 
     Path GraphSearch( String start, String end, algo a){
-        Path res = new Path();
+
+        Algo algointerface = null;
+        context c ;
         switch (a){
             case BFS:
-               res = GraphSearchBFS(start,end);
+                algointerface = new BFSAlgo(g);
                 break;
+
             case DFS:
-               res = GraphSearchDFS(start,end);
+                algointerface = new DFSAlgo(g);
                 break;
 
-
+            case RWS:
+                algointerface = new RWSAlgo(g);
+                break;
         }
+        c = new context(algointerface);
 
-        return res;
+        return c.execute(g, start, end);
 
     }
 
@@ -171,23 +176,31 @@ public class GraphMani {
     }
 
 
-    private Graph<String, DefaultEdge> g;
+
 
     void parseGraph(String filePath) {
-        String graphC = null;
-        try {
-            graphC = Files.readString(Paths.get(filePath));
-        } catch (IOException err) {
-            err.printStackTrace();
-        }
 
+        try {
+            String graphC = Files.readString(Paths.get(filePath));
+            parseGraphHelper(graphC);
+        } catch (IOException err) {
+            System.err.println("Error reading this file: "+err.getMessage());
+        }
+    }
+
+    private void parseGraphHelper(String graphC){
         g = new SimpleDirectedGraph<>(DefaultEdge.class);
 
         DOTImporter<String, DefaultEdge> dotImp = new DOTImporter<>();
         dotImp.setVertexFactory(label -> label);
-        dotImp.importGraph(g, new StringReader(graphC));
 
+        try{
+            dotImp.importGraph(g, new StringReader(graphC));
 
+        }
+        catch(Exception err){
+            System.err.println("Error parsing the content of the graph: "+err.getMessage());
+        }
 
     }
 
@@ -202,14 +215,18 @@ public class GraphMani {
         str.append("Total number of edges: ").append(g.edgeSet().size()).append("\n");
         str.append("Node Labels: ").append(g.vertexSet()).append("\n");
         str.append("Edges: ");
-        for (DefaultEdge e : g.edgeSet()) {
+
+        g.edgeSet().forEach(e -> {
             String src = g.getEdgeSource(e);
             String trg = g.getEdgeTarget(e);
             str.append(src).append(" -> ").append(trg).append(", ");
+        });
+
+        if (str.length() > 2) {
+            str.setLength(str.length() - 2);
         }
-        String res = str.toString();
-        res=res.substring(0, res.length() - 2);
-        return res;
+
+        return str.toString();
     }
 
     void outputGraph(String filePath){
@@ -278,8 +295,8 @@ public class GraphMani {
         BufferedImage image = mxCellRenderer.createBufferedImage(gAdpt, null, 2, Color.WHITE, true, null);
         File imgFile = new File(path);
         try {
-            if(Objects.equals(format, "PNG")) {
-                ImageIO.write(image, "PNG", imgFile);
+            if(Objects.equals(format, PNG_IMG_FORMAT)) {
+                ImageIO.write(image, PNG_IMG_FORMAT, imgFile);
                 System.out.println("Successfully saved image of graph to " + path);
             }
         } catch (IOException err) {
@@ -311,11 +328,6 @@ public class GraphMani {
             throw new RuntimeException("Edge does not exist between " + srcLabel + " to " + dstLabel);
         }
     }
-
-
-
-
-
 
 
     public static void main(String[] args){
@@ -363,5 +375,28 @@ public class GraphMani {
 
         Path result2 = new_f.GraphSearch("a","e", algo.DFS);
         System.out.println("DFS: " +result2.toString());
+
+        System.out.println("=================================Part 3===============================");
+
+        GraphMani BFS_Sp = new GraphMani();
+        BFS_Sp.parseGraph("src/main/sample2.DOT");
+        Path resBFS_Sp = BFS_Sp.GraphSearch("a", "e", algo.BFS);
+        System.out.println("BFS: "+ resBFS_Sp.toString());
+
+        GraphMani DFS_Sp = new GraphMani();
+        DFS_Sp.parseGraph("src/main/sample2.DOT");
+        Path resDFS_Sp = DFS_Sp.GraphSearch("a", "e", algo.DFS);
+        System.out.println("DFS: "+ resDFS_Sp.toString());
+
+
+        GraphMani RWS_Sp = new GraphMani();
+        RWS_Sp.parseGraph("src/main/input2.dot");
+        System.out.println("Random Walk: ");
+        Path resRWS_Sp = RWS_Sp.GraphSearch("a", "c", algo.RWS);
+        System.out.println();
+        System.out.println("RWS: "+ resRWS_Sp.toString());
+
+
+
     }
 }
