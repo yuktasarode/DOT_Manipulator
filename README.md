@@ -176,3 +176,19 @@ System.out.println();
 System.out.println("RWS: "+ resRWS_Sp.toString());
 ```
 
+## Conclusion
+
+In this project, I have learned about:
+- manipulating DOT files
+- function overriding
+- git commands
+- maven
+- git branching and merging concepts
+- coding a theoretical algorithm on a DOT file (BFS and DFS) using JGraphT
+- implementing a new algorithm based on previous knowledge (Random Forest using BFS)
+- refactoring patterns like  strategy patterns and template patterns
+- abstract classes
+- API building
+- concepts of access modifiers
+- continuous integration 
+- writing tests that cover broad possibilities using JUnit
